@@ -1,9 +1,11 @@
+// Load GRPC and proto loader node Module and 
 const grpc = require('grpc')
-//const dataStreamProto = grpc.load('datastream.proto')
-const server = new grpc.Server()
-var mysql      = require('mysql');
 var protoLoader = require("@grpc/proto-loader");
 
+// Load My SQL helper module
+var sqltools = require('./sqltools');
+
+// Load the protocal
 let proto = grpc.loadPackageDefinition(
     protoLoader.loadSync("datastream.proto", {
         keepCase: true,
@@ -14,54 +16,51 @@ let proto = grpc.loadPackageDefinition(
     })
 );
 
+// Parse input parameter to receive mysql host and pass on to MYSQL util
 var host = process.argv.slice(2).toString();
 console.log(host)
+sqltools.loadSQLHost(host)
 
-var con = mysql.createConnection({
-    host: host,
-    user: "root",
-    password: "password",
-    database: "user"
-});
+// implementation Server Streaming proto method definition 
+// receives existing data and push to into MySQL util
+function ServerStreaming(call, callback) {
 
-
-
-function ClientStreaming(call, callback) {
-
-    var sql = "INSERT INTO user.usr (id, name, message) VALUES ?";
+    //place holder for user data 
     values = []
 
+    // call back for stream push 
     call.on('data', function (chunk) {
+        // Add data into place holder on each push
         values.push([parseInt(chunk.user.id), chunk.user.name, chunk.user.message])
-        console.log(chunk.user.id)
     })
+    // call back for stream error 
     call.on('error', function (chunk) {
         console.log("error")
+        // Respond back to the client with en error
         callback({
             result: proto.datastream.DataStreamResult.FAILURE
         })
     })
+    // call back for stream end 
     call.on('end', function () {
-        console.log("end")
         console.log(values)
-
-        con.query(sql, [values], function (err) {
-            if (err) throw err;
-            conn.end();
-        });
-
+        // push the data in to MYSQL util as a BATCH
+        sqltools.pushUserDataToDB(values)
+        // Respond back to the client with success
         callback(null, {
             result: proto.datastream.DataStreamResult.SUCESS
         })
     })
 }
-server.addService(proto.datastream.GRPCDataStream.service, {
-    ClientStreaming: ClientStreaming
-})
 
 
-
-
+// initialize the GRPC Server
+const server = new grpc.Server()
 server.bind("[::]:50051", grpc.ServerCredentials.createInsecure())
 console.log('Server running at http://[::]:50051')
 server.start()
+
+// implementation method mapping for all the service definition in GRPC Server
+server.addService(proto.datastreamblu.GRPCDataStreamBLU.service, {
+    ServerStreaming: ServerStreaming
+})
