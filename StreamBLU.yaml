@@ -1,0 +1,41 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: StreamBLU
+spec:
+  selector:
+    run: StreamBLU
+  ports:
+    - name: StreamBLUport
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: NodePort
+----
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: StreamBLU
+  labels:
+    app: StreamBLU
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: StreamBLU
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: StreamBLU
+    spec:
+      containers:
+      - image: arunramakani/stream-blu:tagname
+        name: StreamBLU
+        env:
+        - name: DATABASE_HOST
+          value: mysql
+        ports:
+        - containerPort: 8081
+          protocol: TCP
