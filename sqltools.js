@@ -1,11 +1,12 @@
+// Load My SQL node Module
+var mysql = require('mysql');
+
+// mysql host and connection module variable
+var host = "mysql"
+var con
+
+
 module.exports = {
-
-    // Load My SQL node Module
-    var mysql = require('mysql');
-
-    // mysql host and connection module variable
-    var host = "mysql"
-    var con
 
     //load host name to the node module and load connection
     function loadSQLHost(dns) {
