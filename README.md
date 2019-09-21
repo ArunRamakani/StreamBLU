@@ -1,3 +1,6 @@
+[![](https://images.microbadger.com/badges/version/arunramakani/stream-blu.svg)](https://microbadger.com/images/arunramakani/stream-blu "Get your own version badge on microbadger.com") [![](https://img.shields.io/docker/pulls/arunramakani/stream-blu.svg)](https://img.shields.io/docker/pulls/arunramakani/stream-blu.svg) [![](https://img.shields.io/docker/stars/arunramakani/stream-blu.svg)](https://img.shields.io/docker/stars/arunramakani/stream-blu.svg)
+
+
 # StreamBLU
 
 Stream Data Business Logic Unit. 
