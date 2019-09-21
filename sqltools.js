@@ -9,7 +9,7 @@ var con
 module.exports = {
 
     //load host name to the node module and load connection
-    function loadSQLHost(dns) {
+    loadSQLHost: function(dns) {
         this.host = dns
 
         this.con = mysql.createConnection({
@@ -22,7 +22,7 @@ module.exports = {
 
 
     // receives  data and log them into My SQL
-    function pushUserDataToDB(users) {
+    pushUserDataToDB: function(users) {
 
         //SQL statement and place holder for batch insert
         var sql = "INSERT INTO user.usr (id, name, message) VALUES ?";
