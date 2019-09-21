@@ -18,8 +18,30 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - name: streamblu
+  - name: grpc-node-stream
     port: 80
-    targetPort: grpc-api
+    targetPort: grpc-node-api
   selector:
     service: streamblu
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: streamblu
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: streamblu
+    spec:
+      containers:
+      - name: streamblu
+        image: arunramakani/stream-blu
+        env:
+        - name: MY_SQL
+          value: mysql
+        ports:
+        - name: grpc-node-api
+          containerPort: 50051
+      restartPolicy: Always
