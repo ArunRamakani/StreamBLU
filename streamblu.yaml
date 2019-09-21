@@ -20,7 +20,7 @@ spec:
       - image: arunramakani/stream-blu
         name: streamblu
         env:
-        - name: DATABASE_HOST
+        - name: MY_SQL
           value: mysql
         ports:
         - containerPort: 8081
