@@ -1,7 +1,7 @@
 const grpc = require('grpc')
 //const dataStreamProto = grpc.load('datastream.proto')
 const server = new grpc.Server()
-var mysql = require('node-mysql');
+var mysql      = require('mysql');
 var protoLoader = require("@grpc/proto-loader");
 
 let proto = grpc.loadPackageDefinition(
@@ -24,6 +24,8 @@ var con = mysql.createConnection({
     database: "user"
 });
 
+
+
 function ClientStreaming(call, callback) {
 
     var sql = "INSERT INTO user.usr (id, name, message) VALUES ?";
@@ -43,7 +45,7 @@ function ClientStreaming(call, callback) {
         console.log("end")
         console.log(values)
 
-        conn.query(sql, [values], function (err) {
+        con.query(sql, [values], function (err) {
             if (err) throw err;
             conn.end();
         });
