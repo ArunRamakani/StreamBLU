@@ -10,6 +10,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-CMD ["node", "./index.js"]
+ENV MY_SQL /app
+
+CMD ["sh", "-c", "node ./index.js ${MY_SQL}"]
 
 EXPOSE 50051

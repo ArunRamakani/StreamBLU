@@ -14,8 +14,11 @@ let proto = grpc.loadPackageDefinition(
     })
 );
 
+var host = process.argv.slice(2).toString();
+console.log(host)
+
 var con = mysql.createConnection({
-    host: "localhost",
+    host: host,
     user: "root",
     password: "password",
     database: "user"
@@ -56,6 +59,7 @@ server.addService(proto.datastream.GRPCDataStream.service, {
 
 
 
-server.bind('127.0.0.1:50052', grpc.ServerCredentials.createInsecure())
-console.log('Server running at http://127.0.0.1:50051')
+
+server.bind("[::]:50051", grpc.ServerCredentials.createInsecure())
+console.log('Server running at http://[::]:50051')
 server.start()
