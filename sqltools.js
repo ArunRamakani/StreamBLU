@@ -10,9 +10,9 @@ module.exports = {
 
     //load host name to the node module and load connection
     function loadSQLHost(dns) {
-        host = dns
+        this.host = dns
 
-        con = mysql.createConnection({
+        this.con = mysql.createConnection({
             host: host,
             user: "root",
             password: "password",
@@ -27,9 +27,9 @@ module.exports = {
         //SQL statement and place holder for batch insert
         var sql = "INSERT INTO user.usr (id, name, message) VALUES ?";
 
-        con.query(sql, [users], function (err) {
+        this.con.query(sql, [users], function (err) {
             if (err) throw err;
-            con.end();
+            this.con.end();
         });
 
     }
