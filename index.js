@@ -58,9 +58,13 @@ function ServerStreaming(call, callback) {
 const server = new grpc.Server()
 server.bind("[::]:50051", grpc.ServerCredentials.createInsecure())
 console.log('Server running at http://[::]:50051')
-server.start()
 
 // implementation method mapping for all the service definition in GRPC Server
 server.addService(proto.datastreamblu.GRPCDataStreamBLU.service, {
     ServerStreaming: ServerStreaming
 })
+
+// Start GRPC server
+server.start()
+
+
