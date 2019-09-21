@@ -1,0 +1,26 @@
+{
+  "name": "streamblu",
+  "version": "1.0.0",
+  "description": "Business logic unit that saves the streaming user object",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArunRamakani/StreamBLU.git"
+  },
+  "author": "Arun Ramakani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArunRamakani/StreamBLU/issues"
+  },
+  "homepage": "https://github.com/ArunRamakani/StreamBLU#readme",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.2",
+    "grpc": "^1.23.3",
+    "node-mysql": "^0.4.2",
+    "uuid": "^3.3.3"
+  }
+}

@@ -1,0 +1,29 @@
+
+syntax = "proto3";
+
+package datastream;
+
+
+enum DataStreamResult {
+	SUCCESS = 0;
+	FAILURE = 1;
+}
+
+message User {
+    int64 id = 1;
+    string name = 2;
+    string message = 3;
+}
+
+message Request {
+    User user = 1;
+}
+
+message Response {
+    DataStreamResult result = 1;
+}
+
+service GRPCDataStream {
+    rpc ClientStreaming (stream Request) returns (Response);
+}
+
