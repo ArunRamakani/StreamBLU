@@ -7,7 +7,7 @@ var sqltools = require('./sqltools');
 
 // Load the protocal
 let proto = grpc.loadPackageDefinition(
-    protoLoader.loadSync("datastream.proto", {
+    protoLoader.loadSync("datastreamblu.proto", {
         keepCase: true,
         longs: String,
         enums: String,
@@ -38,7 +38,7 @@ function ServerStreaming(call, callback) {
         console.log("error")
         // Respond back to the client with en error
         callback({
-            result: proto.datastream.DataStreamResult.FAILURE
+            result: proto.datastreamblu.DataStreamResult.FAILURE
         })
     })
     // call back for stream end 
@@ -48,7 +48,7 @@ function ServerStreaming(call, callback) {
         sqltools.pushUserDataToDB(values)
         // Respond back to the client with success
         callback(null, {
-            result: proto.datastream.DataStreamResult.SUCESS
+            result: proto.datastreamblu.DataStreamResult.SUCESS
         })
     })
 }
