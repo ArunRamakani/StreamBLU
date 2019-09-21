@@ -18,7 +18,7 @@ module.exports = {
             password: "password",
             database: "user"
         });
-    }
+    },
 
 
     // receives  data and log them into My SQL
