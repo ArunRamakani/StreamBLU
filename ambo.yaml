@@ -12,8 +12,8 @@ metadata:
       kind: Mapping
       name: grpc_node_mapping
       grpc: True
-      prefix: /datastream.GRPCDataStream/
-      rewrite: /datastream.GRPCDataStream/
+      prefix: /datastreamblu.GRPCDataStreamBLU/
+      rewrite: /datastreamblu.GRPCDataStreamBLU/
       service: streamblu
 spec:
   type: ClusterIP
