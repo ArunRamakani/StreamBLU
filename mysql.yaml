@@ -1,16 +1,16 @@
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+    labels:
+    name: mysql
 spec:
-  type: LoadBalancer
-  externalTrafficPolicy: Local
-  ports:
-   - port: 3306
-     targetPort: 3306
-  selector:
-    service: mysql
+    ports:
+    # the port that this service should serve on
+        - port: 3306
+    # label keys and values that must match in order to receive traffic for this service
+    selector:
+        name: mysql
+    externalIPs: ["35.188.5.175"]
 ---
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
