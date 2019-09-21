@@ -11,6 +11,8 @@ kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h 
 
 create database user;
 
+CREATE TABLE user.usr ( id INT(6) UNSIGNED , name VARCHAR(30) NOT NULL, message VARCHAR(30) NOT NULL);
+
 
 
 
