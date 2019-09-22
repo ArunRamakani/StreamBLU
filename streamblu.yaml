@@ -5,12 +5,22 @@ metadata:
   labels:
     service: streamblu
   name: streamblu
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: grpc_node_mapping
+      grpc: True
+      prefix: /datastreamblu.GRPCDataStreamBLU/
+      rewrite: /datastreamblu.GRPCDataStreamBLU/
+      service: streamblu
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - name: grpc-node-stream
-    port: 8080
-    nodePort: 8080
+    port: 80
+    targetPort: grpc-node-api
   selector:
     service: streamblu
 ---
