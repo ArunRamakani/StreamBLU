@@ -29,7 +29,6 @@ module.exports = {
 
         this.con.query(sql, [users], function (err) {
             if (err) throw err;
-            this.con.end();
         });
 
     }
