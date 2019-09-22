@@ -9,8 +9,8 @@ spec:
   type: NodePort
   ports:
   - name: grpc-node-stream
-    port: 80
-    nodePort: 50051
+    port: 50051
+    nodePort: 8080
   selector:
     service: streamblu
 ---
