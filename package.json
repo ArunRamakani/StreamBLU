@@ -19,7 +19,7 @@
   "homepage": "https://github.com/ArunRamakani/StreamBLU#readme",
   "dependencies": {
     "@grpc/proto-loader": "^0.5.2",
-    "grpc": "^1.23.3",
+    "grpc": "^1.24.9",
     "mysql": "^2.17.1",
     "node-mysql": "^0.4.2",
     "uuid": "^3.3.3"
